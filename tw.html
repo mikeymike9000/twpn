@@ -6,7 +6,8 @@
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
   <style>
     html, body { margin: 0; padding: 0; }
-    #chart { left: 0; right: 0; display: flex; align-items: center; }
+    #text { position: absolute; top: 5px; }
+    #chart { position: absolute; left: 0; right: 0; display: flex; align-items: center; }
     #gaugeChart, #donutChart, #barChart, #splineChart { flex: 1; margin: 20px; }
     #map { position: fixed; top: 370px; bottom:20px; left: 20px; right: 20px }
   </style>
@@ -16,6 +17,7 @@
 
 <body>
 
+<div id='text'><h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asset: TW822356-TT</h2></div>
 <div id='chart'>
   <div id='gaugeChart'></div>
   <div id='donutChart'></div>
