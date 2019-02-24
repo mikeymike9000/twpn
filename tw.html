@@ -7,7 +7,7 @@
   <style>
     html, body { margin: 0; padding: 0; }
     #text { position: absolute; top: 5px; }
-    #chart { position: absolute; left: 0; right: 0; display: flex; align-items: center; }
+    #chart { left: 0; right: 0; display: flex; align-items: center; }
     #gaugeChart, #donutChart, #barChart, #splineChart { flex: 1; margin: 20px; }
     #map { position: absolute; top: 370px; bottom:20px; left: 20px; right: 20px }
   </style>
@@ -100,19 +100,15 @@
           'Axle 1': a1, 'Axle 2': a2, 'Axle 3': a3, 'Temp': t1, '_eonDatetime': 1550689920292
   }}})}, 1000);
 
-</script>
-
-
-<script>
-  var pubnub = new PubNub({ publishKey: 'demo', subscribeKey: 'demo' });
+  var pubnub2 = new PubNub({ publishKey: 'demo', subscribeKey: 'demo' });
   var channels = ['pubnub-mapbox-1', 'pubnub-mapbox-2', 'pubnub-mapbox-3'];
-  pubnub.channelGroups.addChannels(
+  pubnub2.channelGroups.addChannels(
     { channels: channels, channelGroup: "pubnub-mapbox-example" },
     function(status) {
     if (status.error) { console.log("operation failed, status: ", status); }
     else {
       console.log("operation done!")
-      pubnub.channelGroups.listChannels({ channelGroup: "pubnub-mapbox-example" },
+      pubnub2.channelGroups.listChannels({ channelGroup: "pubnub-mapbox-example" },
         function (status, response) {
           if (status.error) { console.log("operation failed w/ error:", status); return; }
           console.log("listing push channel for device")
@@ -121,7 +117,7 @@
   })});}});
 
   eon.map({
-    pubnub: pubnub, id: 'map', channelGroups: ['pubnub-mapbox-example'],
+    pubnub: pubnub2, id: 'map', channelGroups: ['pubnub-mapbox-example'],
     mbId: 'ianjennings.l896mh2e',
     mbToken: 'pk.eyJ1IjoiaWFuamVubmluZ3MiLCJhIjoiZExwb0p5WSJ9.XLi48h-NOyJOCJuu1-h-Jg',
     rotate: true, history: true,
@@ -145,7 +141,7 @@
     new_point.latlng[0] + (getNonZeroRandomNumber() * 0.00005),
     new_point.latlng[1] + (getNonZeroRandomNumber() * 0.0001) ];
     var m = {}; m[pointId] = new_point;
-    pubnub.publish({ channel: channel, message: m }); }
+    pubnub2.publish({ channel: channel, message: m }); }
   function getNonZeroRandomNumber(){
     var random = Math.floor(Math.random()*199) - 99;
     if(random==0) return getNonZeroRandomNumber();
